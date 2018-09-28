@@ -62,5 +62,79 @@ let getRestaurantsByName = (resName, callback) => {
   });
 };
 
+//delete
+const delRestaurantsById = (resId, callback) => {
+  const id = parseInt(resId, 10);
+  Restaurants.deleteOne({ id }, (err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
+const delRestaurantsByName = (resName, callback) => {
+  Restaurants.deleteOne({ lName: resName }, (err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
+//post
+const postRestaurantsById = (resId, callback) => {
+  const id = parseInt(resId, 10);
+  const restName = new Restaurants({ id });
+  restName.save((err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
+const postRestaurantsByName = (resName, callback) => {
+  const restName = new Restaurants({ name: resName });
+  restName.save((err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
+//update
+const putRestaurantsById = (resId, callback) => {
+  const id = parseInt(resId, 10);
+  Restaurants.updateOne({ id }, { name: 'sup' }, (err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
+const putRestaurantsByName = (resName, callback) => {
+  Restaurants.updateOne({ lName: resName }, { name: 'sup' }, (err, d) => {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, d);
+    }
+  });
+};
+
 exports.getRestaurantsByName = getRestaurantsByName;
 exports.getRestaurantsById = getRestaurantsById;
+exports.delRestaurantsByName = delRestaurantsByName;
+exports.delRestaurantsById = delRestaurantsById;
+exports.postRestaurantsByName = postRestaurantsByName;
+exports.postRestaurantsById = postRestaurantsById;
+exports.putRestaurantsByName = putRestaurantsByName;
+exports.putRestaurantsById = putRestaurantsById;
