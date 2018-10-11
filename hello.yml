@@ -1,0 +1,15 @@
+config:
+  target: 'http://localhost:7764'
+  phases:
+    - duration: 60
+      arrivalRate: 100000
+  defaults:
+    headers:
+      x-my-service-auth: '987401838271002188298567'
+scenarios:
+  - flow:
+    - get:
+        url: "/api/header/{{$randomNumber(1,100000)}}/res"
+        # url: "/9"
+
+

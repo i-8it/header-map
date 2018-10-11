@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 let Promise = require('bluebird');
 mongoose.Promise = Promise;
 
-mongoose.connect('mongodb://127.0.0.1:27017/yelpReactor', {useNewUrlParser: true });
+mongoose.connect('mongodb://127.0.0.1:27017/yelp8', {useNewUrlParser: true });
 
 let restaurantSchema = mongoose.Schema({
   id: Number,
@@ -41,16 +41,60 @@ let restaurantSchema = mongoose.Schema({
 let Restaurants = mongoose.model('Restaurants', restaurantSchema);
 
 //Finding all data
-let getRestaurantsById = (resId, callback) => {
-  let Id = parseInt(resId);
-  Restaurants.find({id: Id}, (err, d)=>{
-    if (err) {
-      callback(err, null);
+// let getRestaurantsById = (resId, callback) => {
+//   let Id = parseInt(resId);
+//   Restaurants.find({id: Id}, (err, d)=>{
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, d);
+//     }
+//   });
+// };
+
+//redis
+let getRestaurantsById = (resId, callback, redis) => {
+
+  redis.get(JSON.stringify(resId), function(err, reply) {
+    if(err) {
+      callback(null)
+    } else if(reply) {
+      callback(reply);
     } else {
-      callback(null, d);
+
+        let Id = parseInt(resId);
+        Restaurants.find({id: Id}, (err, d)=>{
+          if (err) {
+            callback(err, null);
+          } else {
+
+            redis.set(Id, JSON.stringify(d), function() {
+              callback(null, d);
+            })
+
+            //callback(null, d);
+          }
+        });
+
     }
-  });
+  })
 };
+//^^
+
+//regular
+// let getRestaurantsById = (resId, callback, redis) => {
+//   let Id = parseInt(resId);
+//   Restaurants.find({id: Id}, (err, d)=>{
+//     if (err) {
+//       callback(err, null);
+//     } else {
+//       callback(null, d);
+//     }
+//   });
+// };
+
+
+
 
 let getRestaurantsByName = (resName, callback) => {
   Restaurants.find({lName: resName}, (err, d)=>{

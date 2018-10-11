@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "header-map",
   "jest": {
     "verbose": true,
     "moduleNameMapper": {
@@ -29,10 +29,9 @@
       "css-loader"
     ]
   },
-  "version": "",
-  "description": "",
+  "description": "> Project description",
   "author": "",
-  "license": "",
+  "license": "ISC",
   "engines": {
     "node": ">=6.13.0"
   },
@@ -43,8 +42,13 @@
     "test": "jest --coverage --verbose"
   },
   "dependencies": {
+    "artillery": "^1.6.0-24",
     "eslint": "^5.5.0",
-    "express-http-proxy": "^1.4.0"
+    "express-http-proxy": "^1.4.0",
+    "morgan": "^1.9.1",
+    "newrelic": "^4.9.0",
+    "nodemon": "^1.18.4",
+    "redis": "^2.8.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
@@ -59,7 +63,7 @@
     "css-loader": "^1.0.0",
     "enzyme": "^3.6.0",
     "enzyme-adapter-react-16": "^1.5.0",
-    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor",
+    "eslint-config-hackreactor": "git://github.com/reactorcore/eslint-config-hackreactor.git",
     "express": "^4.16.3",
     "faker": "^4.1.0",
     "identity-obj-proxy": "^3.0.0",
@@ -74,5 +78,18 @@
     "underscore": "^1.9.1",
     "webpack": "^4.17.2",
     "webpack-cli": "^3.1.0"
-  }
+  },
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-8it/header-map.git"
+  },
+  "bugs": {
+    "url": "https://github.com/i-8it/header-map/issues"
+  },
+  "homepage": "https://github.com/i-8it/header-map#readme"
 }
