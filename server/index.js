@@ -5,10 +5,16 @@ var cors = require('cors');
 let app = express();
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+
+// const mongoose = require('mongoose');
+// mongoose.connect('mongodb://ec2-13-57-222-240.us-west-1.compute.amazonaws.com:27017/yelp8', {useNewUrlParser: true}, (err) => {
+//   if (err) return console.log(err);
+//   console.log('Mongo Connected')
+// });
+
+
 let redisClient = require('redis').createClient;
 let redis = redisClient(6379, 'localhost');
-
-
 
 //
 let getRestaurantsById = require('../database/index.js').getRestaurantsById;
@@ -67,7 +73,7 @@ app.post('/api/header/:id/res', (req, res) => {
 });
 
 
-let port = 7764;
+let port = 7777;
 
 app.listen(port, function() {
   console.log(`listening on port ${port}`);
